@@ -26,3 +26,5 @@ resources:
       errors:
         404:
           code: InvalidRequestException
+      terminal_codes:
+        - InvalidRequestException
