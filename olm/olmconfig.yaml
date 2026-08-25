@@ -1,0 +1,39 @@
+# This configuration is a placeholder. Replace any values with relevant values for your
+# service controller project.
+---
+annotations:
+  capabilityLevel: Basic Install
+  shortDescription: AWS EMR controller is a service controller for managing EMR resources
+    in Kubernetes
+displayName: AWS Controllers for Kubernetes - Amazon EMR
+description: |-
+  Manage Amazon EMR resources in AWS from within your Kubernetes cluster.
+
+
+  **About Amazon EMR**
+
+
+  Amazon EMR is a web service that makes it easier to process large amounts of data efficiently. Amazon EMR uses Hadoop processing combined with several Amazon Web Services services to do tasks such as web indexing, data mining, log file analysis, machine learning, scientific simulation, and data warehouse management.
+
+  **About the AWS Controllers for Kubernetes**
+
+
+  This controller is a component of the [AWS Controller for Kubernetes](https://github.com/aws/aws-controllers-k8s)
+  project. This project is currently in **developer preview**.
+
+
+  **Pre-Installation Steps**
+
+
+  Please follow the following link: [Red Hat OpenShift](https://aws-controllers-k8s.github.io/community/docs/user-docs/openshift/)
+samples:
+- kind: ExampleCustomKind
+  spec: '{}'
+- kind: SecondExampleCustomKind
+  spec: '{}'
+maintainers:
+- name: "emr maintainer team"
+  email: "ack-maintainers@amazon.com"
+links:
+- name: Amazon EMR Developer Resources
+  url: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-what-is-emr.html

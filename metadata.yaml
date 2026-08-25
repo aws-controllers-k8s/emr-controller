@@ -1,0 +1,8 @@
+service:
+  full_name: "Amazon EMR running on Amazon EC2"
+  short_name: EMR
+  link: https://aws.amazon.com/emr/
+  documentation: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-what-is-emr.html
+api_versions:
+  - api_version: v1alpha1
+    status: available
