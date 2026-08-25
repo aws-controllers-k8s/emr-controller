@@ -22,6 +22,7 @@ License version 2.0, we include the full text of the package's License below.
 
 * `github.com/aws-controllers-k8s/runtime`
 * `github.com/aws/aws-sdk-go-v2`
+* `github.com/aws/aws-sdk-go-v2/config`
 * `github.com/aws/aws-sdk-go-v2/service/emr`
 * `github.com/aws/smithy-go`
 * `github.com/go-logr/logr`
@@ -1538,6 +1539,8 @@ Subdependencies:
 #### github.com/aws/smithy-go
 
 License Identifier: Apache-2.0
+
+
 
 ### github.com/aws/aws-sdk-go-v2/service/emr
 
