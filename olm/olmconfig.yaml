@@ -13,8 +13,7 @@ description: |-
   **About Amazon EMR**
 
 
-  {ADD YOUR DESCRIPTION HERE}
-
+  Amazon EMR is a web service that makes it easier to process large amounts of data efficiently. Amazon EMR uses Hadoop processing combined with several Amazon Web Services services to do tasks such as web indexing, data mining, log file analysis, machine learning, scientific simulation, and data warehouse management.
 
   **About the AWS Controllers for Kubernetes**
 
@@ -37,4 +36,4 @@ maintainers:
   email: "ack-maintainers@amazon.com"
 links:
 - name: Amazon EMR Developer Resources
-  url: https://aws.amazon.com/EMR/developer-resources/
+  url: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-what-is-emr.html
