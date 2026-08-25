@@ -25,3 +25,474 @@ var (
 	_ = &metav1.Time{}
 	_ = ackv1alpha1.AWSAccountID("")
 )
+
+// With Amazon EMR release version 4.0 and later, the only accepted parameter
+// is the application name. To pass arguments to applications, you use configuration
+// classifications specified using configuration JSON objects. For more information,
+// see Configuring Applications (https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-configure-apps.html).
+//
+// With earlier Amazon EMR releases, the application is any Amazon or third-party
+// software that you can add to the cluster. This structure contains a list
+// of strings that indicates the software to use with the cluster and accepts
+// a user argument list. Amazon EMR accepts and forwards the argument list to
+// the corresponding installation script as bootstrap action argument.
+type Application struct {
+	Name    *string `json:"name,omitempty"`
+	Version *string `json:"version,omitempty"`
+}
+
+// The reason for an AutoScalingPolicyStatus change.
+type AutoScalingPolicyStateChangeReason struct {
+	Message *string `json:"message,omitempty"`
+}
+
+// A configuration for Amazon EMR block public access. When BlockPublicSecurityGroupRules
+// is set to true, Amazon EMR prevents cluster creation if one of the cluster's
+// security groups has a rule that allows inbound traffic from 0.0.0.0/0 or
+// ::/0 on a port, unless the port is specified as an exception using PermittedPublicSecurityGroupRuleRanges.
+type BlockPublicAccessConfiguration struct {
+	Classification *string `json:"classification,omitempty"`
+}
+
+// Properties that describe the Amazon Web Services principal that created the
+// BlockPublicAccessConfiguration using the PutBlockPublicAccessConfiguration
+// action as well as the date and time that the configuration was created. Each
+// time a configuration for block public access is updated, Amazon EMR updates
+// this metadata.
+type BlockPublicAccessConfigurationMetadata struct {
+	CreationDateTime *metav1.Time `json:"creationDateTime,omitempty"`
+}
+
+// Specification of the status of a CancelSteps request. Available only in Amazon
+// EMR version 4.8.0 and later, excluding version 5.0.0.
+type CancelStepsInfo struct {
+	Reason *string `json:"reason,omitempty"`
+}
+
+// The definition of a CloudWatch metric alarm, which determines when an automatic
+// scaling activity is triggered. When the defined alarm conditions are satisfied,
+// scaling activity begins.
+type CloudWatchAlarmDefinition struct {
+	MetricName *string `json:"metricName,omitempty"`
+	Namespace  *string `json:"namespace,omitempty"`
+}
+
+// Holds CloudWatch log configuration settings and metadata that specify settings
+// like log files to monitor and where to send them.
+type CloudWatchLogConfiguration struct {
+	EncryptionKeyARN    *string `json:"encryptionKeyARN,omitempty"`
+	LogGroupName        *string `json:"logGroupName,omitempty"`
+	LogStreamNamePrefix *string `json:"logStreamNamePrefix,omitempty"`
+}
+
+// The detailed description of the cluster.
+type Cluster struct {
+	AutoScalingRole       *string `json:"autoScalingRole,omitempty"`
+	LogEncryptionKMSKeyID *string `json:"logEncryptionKMSKeyID,omitempty"`
+	LogURI                *string `json:"logURI,omitempty"`
+	MasterPublicDNSName   *string `json:"masterPublicDNSName,omitempty"`
+	Name                  *string `json:"name,omitempty"`
+	OSReleaseLabel        *string `json:"oSReleaseLabel,omitempty"`
+	ReleaseLabel          *string `json:"releaseLabel,omitempty"`
+	RequestedAMIVersion   *string `json:"requestedAMIVersion,omitempty"`
+	RunningAMIVersion     *string `json:"runningAMIVersion,omitempty"`
+	SecurityConfiguration *string `json:"securityConfiguration,omitempty"`
+	ServiceRole           *string `json:"serviceRole,omitempty"`
+}
+
+// The reason that the cluster changed to its current state.
+type ClusterStateChangeReason struct {
+	Message *string `json:"message,omitempty"`
+}
+
+// The summary description of the cluster.
+type ClusterSummary struct {
+	Name *string `json:"name,omitempty"`
+}
+
+// Represents the timeline of the cluster's lifecycle.
+type ClusterTimeline struct {
+	CreationDateTime *metav1.Time `json:"creationDateTime,omitempty"`
+	EndDateTime      *metav1.Time `json:"endDateTime,omitempty"`
+	ReadyDateTime    *metav1.Time `json:"readyDateTime,omitempty"`
+}
+
+// An entity describing an executable that runs on a cluster.
+type Command struct {
+	Name       *string `json:"name,omitempty"`
+	ScriptPath *string `json:"scriptPath,omitempty"`
+}
+
+// Amazon EMR releases 4.x or later.
+//
+// An optional configuration specification to be used when provisioning cluster
+// instances, which can include configurations for applications and software
+// bundled with Amazon EMR. A configuration consists of a classification, properties,
+// and optional nested configurations. A classification refers to an application-specific
+// configuration file. Properties are the settings you want to change in that
+// file. For more information, see Configuring Applications (https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-configure-apps.html).
+type Configuration struct {
+	Classification *string `json:"classification,omitempty"`
+}
+
+// Configuration of requested EBS block device associated with the instance
+// group.
+type EBSBlockDevice struct {
+	Device *string `json:"device,omitempty"`
+}
+
+// EBS block device that's attached to an Amazon EC2 instance.
+type EBSVolume struct {
+	Device   *string `json:"device,omitempty"`
+	VolumeID *string `json:"volumeID,omitempty"`
+}
+
+// Provides information about the Amazon EC2 instances in a cluster grouped
+// by category. For example, key name, subnet ID, IAM instance profile, and
+// so on.
+type EC2InstanceAttributes struct {
+	EC2AvailabilityZone           *string `json:"ec2AvailabilityZone,omitempty"`
+	EC2KeyName                    *string `json:"ec2KeyName,omitempty"`
+	EC2SubnetID                   *string `json:"ec2SubnetID,omitempty"`
+	EmrManagedMasterSecurityGroup *string `json:"emrManagedMasterSecurityGroup,omitempty"`
+	EmrManagedSlaveSecurityGroup  *string `json:"emrManagedSlaveSecurityGroup,omitempty"`
+	IAMInstanceProfile            *string `json:"iamInstanceProfile,omitempty"`
+	ServiceAccessSecurityGroup    *string `json:"serviceAccessSecurityGroup,omitempty"`
+}
+
+// A tuple that provides information about an error that caused a cluster to
+// terminate.
+type ErrorDetail struct {
+	ErrorCode    *string `json:"errorCode,omitempty"`
+	ErrorMessage *string `json:"errorMessage,omitempty"`
+}
+
+// The details of the step failure. The service attempts to detect the root
+// cause for many common failures.
+type FailureDetails struct {
+	LogFile *string `json:"logFile,omitempty"`
+	Message *string `json:"message,omitempty"`
+	Reason  *string `json:"reason,omitempty"`
+}
+
+// A job flow step consisting of a JAR file whose main function will be executed.
+// The main function submits a job for Hadoop to execute and waits for the job
+// to finish or fail.
+type HadoopJarStepConfig struct {
+	Jar       *string `json:"jar,omitempty"`
+	MainClass *string `json:"mainClass,omitempty"`
+}
+
+// A cluster step consisting of a JAR file whose main function will be executed.
+// The main function submits a job for Hadoop to execute and waits for the job
+// to finish or fail.
+type HadoopStepConfig struct {
+	Jar       *string `json:"jar,omitempty"`
+	MainClass *string `json:"mainClass,omitempty"`
+}
+
+// Represents an Amazon EC2 instance provisioned as part of cluster.
+type Instance struct {
+	InstanceGroupID  *string `json:"instanceGroupID,omitempty"`
+	PrivateDNSName   *string `json:"privateDNSName,omitempty"`
+	PrivateIPAddress *string `json:"privateIPAddress,omitempty"`
+	PublicDNSName    *string `json:"publicDNSName,omitempty"`
+	PublicIPAddress  *string `json:"publicIPAddress,omitempty"`
+}
+
+// Provides status change reason details for the instance fleet.
+//
+// The instance fleet configuration is available only in Amazon EMR releases
+// 4.8.0 and later, excluding 5.0.x versions.
+type InstanceFleetStateChangeReason struct {
+	Message *string `json:"message,omitempty"`
+}
+
+// Provides historical timestamps for the instance fleet, including the time
+// of creation, the time it became ready to run jobs, and the time of termination.
+//
+// The instance fleet configuration is available only in Amazon EMR releases
+// 4.8.0 and later, excluding 5.0.x versions.
+type InstanceFleetTimeline struct {
+	CreationDateTime *metav1.Time `json:"creationDateTime,omitempty"`
+	EndDateTime      *metav1.Time `json:"endDateTime,omitempty"`
+	ReadyDateTime    *metav1.Time `json:"readyDateTime,omitempty"`
+}
+
+// This entity represents an instance group, which is a group of instances that
+// have common purpose. For example, CORE instance group is used for HDFS.
+type InstanceGroup struct {
+	BidPrice *string `json:"bidPrice,omitempty"`
+	Name     *string `json:"name,omitempty"`
+}
+
+// Detailed information about an instance group.
+type InstanceGroupDetail struct {
+	CreationDateTime      *metav1.Time `json:"creationDateTime,omitempty"`
+	EndDateTime           *metav1.Time `json:"endDateTime,omitempty"`
+	LastStateChangeReason *string      `json:"lastStateChangeReason,omitempty"`
+	ReadyDateTime         *metav1.Time `json:"readyDateTime,omitempty"`
+	StartDateTime         *metav1.Time `json:"startDateTime,omitempty"`
+}
+
+// The status change reason details for the instance group.
+type InstanceGroupStateChangeReason struct {
+	Message *string `json:"message,omitempty"`
+}
+
+// The timeline of the instance group lifecycle.
+type InstanceGroupTimeline struct {
+	CreationDateTime *metav1.Time `json:"creationDateTime,omitempty"`
+	EndDateTime      *metav1.Time `json:"endDateTime,omitempty"`
+	ReadyDateTime    *metav1.Time `json:"readyDateTime,omitempty"`
+}
+
+// The details of the status change reason for the instance.
+type InstanceStateChangeReason struct {
+	Message *string `json:"message,omitempty"`
+}
+
+// The timeline of the instance lifecycle.
+type InstanceTimeline struct {
+	CreationDateTime *metav1.Time `json:"creationDateTime,omitempty"`
+	EndDateTime      *metav1.Time `json:"endDateTime,omitempty"`
+	ReadyDateTime    *metav1.Time `json:"readyDateTime,omitempty"`
+}
+
+// A description of a cluster (job flow).
+type JobFlowDetail struct {
+	AutoScalingRole       *string `json:"autoScalingRole,omitempty"`
+	JobFlowRole           *string `json:"jobFlowRole,omitempty"`
+	LogEncryptionKMSKeyID *string `json:"logEncryptionKMSKeyID,omitempty"`
+	LogURI                *string `json:"logURI,omitempty"`
+	ServiceRole           *string `json:"serviceRole,omitempty"`
+}
+
+// Describes the status of the cluster (job flow).
+type JobFlowExecutionStatusDetail struct {
+	CreationDateTime      *metav1.Time `json:"creationDateTime,omitempty"`
+	EndDateTime           *metav1.Time `json:"endDateTime,omitempty"`
+	LastStateChangeReason *string      `json:"lastStateChangeReason,omitempty"`
+	ReadyDateTime         *metav1.Time `json:"readyDateTime,omitempty"`
+	StartDateTime         *metav1.Time `json:"startDateTime,omitempty"`
+}
+
+// Specify the type of Amazon EC2 instances that the cluster (job flow) runs
+// on.
+type JobFlowInstancesDetail struct {
+	MasterInstanceID    *string `json:"masterInstanceID,omitempty"`
+	MasterPublicDNSName *string `json:"masterPublicDNSName,omitempty"`
+}
+
+// A key-value pair.
+type KeyValue struct {
+	Key   *string `json:"key,omitempty"`
+	Value *string `json:"value,omitempty"`
+}
+
+// A CloudWatch dimension, which is specified using a Key (known as a Name in
+// CloudWatch), Value pair. By default, Amazon EMR uses one dimension whose
+// Key is JobFlowID and Value is a variable representing the cluster ID, which
+// is ${emr.clusterId}. This enables the rule to bootstrap when the cluster
+// ID becomes available.
+type MetricDimension struct {
+	Key   *string `json:"key,omitempty"`
+	Value *string `json:"value,omitempty"`
+}
+
+// A notebook execution. An execution is a specific instance that an Amazon
+// EMR Notebook is run using the StartNotebookExecution action.
+type NotebookExecution struct {
+	EndTime               *metav1.Time `json:"endTime,omitempty"`
+	LastStateChangeReason *string      `json:"lastStateChangeReason,omitempty"`
+	NotebookParams        *string      `json:"notebookParams,omitempty"`
+	OutputNotebookURI     *string      `json:"outputNotebookURI,omitempty"`
+	StartTime             *metav1.Time `json:"startTime,omitempty"`
+}
+
+// Details for a notebook execution. The details include information such as
+// the unique ID and status of the notebook execution.
+type NotebookExecutionSummary struct {
+	EndTime           *metav1.Time `json:"endTime,omitempty"`
+	ExecutionEngineID *string      `json:"executionEngineID,omitempty"`
+	StartTime         *metav1.Time `json:"startTime,omitempty"`
+}
+
+// The Amazon Linux release specified for a cluster in the RunJobFlow request.
+type OSRelease struct {
+	Label *string `json:"label,omitempty"`
+}
+
+// Holds persistent application user interface information. Applications installed
+// on the Amazon EMR cluster publish user interfaces as web sites to monitor
+// cluster activity.
+type PersistentAppUI struct {
+	CreationTime          *metav1.Time `json:"creationTime,omitempty"`
+	LastModifiedTime      *metav1.Time `json:"lastModifiedTime,omitempty"`
+	LastStateChangeReason *string      `json:"lastStateChangeReason,omitempty"`
+}
+
+// The Amazon EC2 Availability Zone configuration of the cluster (job flow).
+type PlacementType struct {
+	AvailabilityZone *string `json:"availabilityZone,omitempty"`
+}
+
+// The release label filters by application or version prefix.
+type ReleaseLabelFilter struct {
+	Application *string `json:"application,omitempty"`
+	Prefix      *string `json:"prefix,omitempty"`
+}
+
+// The Amazon S3 configuration for monitoring log publishing. You can configure
+// your step to send log information to Amazon S3. When it's specified, it takes
+// precedence over the cluster's logging configuration. If you don't specify
+// this configuration entirely, or omit individual fields, EMR falls back to
+// cluster-level logging behavior.
+type S3MonitoringConfiguration struct {
+	EncryptionKeyARN *string `json:"encryptionKeyARN,omitempty"`
+	LogURI           *string `json:"logURI,omitempty"`
+}
+
+// A scale-in or scale-out rule that defines scaling activity, including the
+// CloudWatch metric alarm that triggers activity, how Amazon EC2 instances
+// are added or removed, and the periodicity of adjustments. The automatic scaling
+// policy for an instance group can comprise one or more automatic scaling rules.
+type ScalingRule struct {
+	Description *string `json:"description,omitempty"`
+	Name        *string `json:"name,omitempty"`
+}
+
+// Configuration of the script to run during a bootstrap action.
+type ScriptBootstrapActionConfig struct {
+	Path *string `json:"path,omitempty"`
+}
+
+// The creation date and time, and name, of a security configuration.
+type SecurityConfigurationSummary struct {
+	CreationDateTime *metav1.Time `json:"creationDateTime,omitempty"`
+	Name             *string      `json:"name,omitempty"`
+}
+
+// Detailed information about a Spark Connect session.
+type Session struct {
+	CreatedAt         *metav1.Time `json:"createdAt,omitempty"`
+	EndedAt           *metav1.Time `json:"endedAt,omitempty"`
+	IdleSince         *metav1.Time `json:"idleSince,omitempty"`
+	ServerURL         *string      `json:"serverURL,omitempty"`
+	StartedAt         *metav1.Time `json:"startedAt,omitempty"`
+	StateChangeReason *string      `json:"stateChangeReason,omitempty"`
+	UpdatedAt         *metav1.Time `json:"updatedAt,omitempty"`
+}
+
+// The CloudWatch Logs configuration for a session.
+type SessionCloudWatchLoggingConfiguration struct {
+	EncryptionKeyARN    *string `json:"encryptionKeyARN,omitempty"`
+	LogGroup            *string `json:"logGroup,omitempty"`
+	LogStreamNamePrefix *string `json:"logStreamNamePrefix,omitempty"`
+}
+
+// The Amazon EMR-managed logging configuration for a session.
+type SessionManagedLoggingConfiguration struct {
+	EncryptionKeyARN *string `json:"encryptionKeyARN,omitempty"`
+}
+
+// Details for an Amazon EMR Studio session mapping including creation time,
+// user or group ID, Studio ID, and so on.
+type SessionMappingDetail struct {
+	CreationTime     *metav1.Time `json:"creationTime,omitempty"`
+	LastModifiedTime *metav1.Time `json:"lastModifiedTime,omitempty"`
+}
+
+// Details for an Amazon EMR Studio session mapping. The details do not include
+// the time the session mapping was last modified.
+type SessionMappingSummary struct {
+	CreationTime *metav1.Time `json:"creationTime,omitempty"`
+}
+
+// The Amazon S3 logging configuration for a session.
+type SessionS3LoggingConfiguration struct {
+	EncryptionKeyARN *string `json:"encryptionKeyARN,omitempty"`
+	LogURI           *string `json:"logURI,omitempty"`
+}
+
+// The returned release label application names or versions.
+type SimplifiedApplication struct {
+	Name    *string `json:"name,omitempty"`
+	Version *string `json:"version,omitempty"`
+}
+
+// This represents a step in a cluster.
+type Step struct {
+	EncryptionKeyARN *string `json:"encryptionKeyARN,omitempty"`
+	LogURI           *string `json:"logURI,omitempty"`
+	Name             *string `json:"name,omitempty"`
+}
+
+// The execution state of a step.
+type StepExecutionStatusDetail struct {
+	CreationDateTime      *metav1.Time `json:"creationDateTime,omitempty"`
+	EndDateTime           *metav1.Time `json:"endDateTime,omitempty"`
+	LastStateChangeReason *string      `json:"lastStateChangeReason,omitempty"`
+	StartDateTime         *metav1.Time `json:"startDateTime,omitempty"`
+}
+
+// The details of the step state change reason.
+type StepStateChangeReason struct {
+	Message *string `json:"message,omitempty"`
+}
+
+// The summary of the cluster step.
+type StepSummary struct {
+	EncryptionKeyARN *string `json:"encryptionKeyARN,omitempty"`
+	LogURI           *string `json:"logURI,omitempty"`
+	Name             *string `json:"name,omitempty"`
+}
+
+// The timeline of the cluster step lifecycle.
+type StepTimeline struct {
+	CreationDateTime *metav1.Time `json:"creationDateTime,omitempty"`
+	EndDateTime      *metav1.Time `json:"endDateTime,omitempty"`
+	StartDateTime    *metav1.Time `json:"startDateTime,omitempty"`
+}
+
+// Details for an Amazon EMR Studio including ID, creation time, name, and so
+// on.
+type Studio struct {
+	CreationTime      *metav1.Time `json:"creationTime,omitempty"`
+	DefaultS3Location *string      `json:"defaultS3Location,omitempty"`
+	EncryptionKeyARN  *string      `json:"encryptionKeyARN,omitempty"`
+	IDpAuthURL        *string      `json:"idpAuthURL,omitempty"`
+	ServiceRole       *string      `json:"serviceRole,omitempty"`
+	URL               *string      `json:"url,omitempty"`
+	UserRole          *string      `json:"userRole,omitempty"`
+}
+
+// Details for an Amazon EMR Studio, including ID, Name, VPC, and Description.
+// To fetch additional details such as subnets, IAM roles, security groups,
+// and tags for the Studio, use the DescribeStudio API.
+type StudioSummary struct {
+	CreationTime *metav1.Time `json:"creationTime,omitempty"`
+}
+
+// An instance type that the specified Amazon EMR release supports.
+type SupportedInstanceType struct {
+	Architecture     *string `json:"architecture,omitempty"`
+	InstanceFamilyID *string `json:"instanceFamilyID,omitempty"`
+	Type             *string `json:"type_,omitempty"`
+}
+
+// A key-value pair containing user-defined metadata that you can associate
+// with an Amazon EMR resource. Tags make it easier to associate clusters in
+// various ways, such as grouping clusters to track your Amazon EMR resource
+// allocation costs. For more information, see Tag Clusters (https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html).
+type Tag struct {
+	Key   *string `json:"key,omitempty"`
+	Value *string `json:"value,omitempty"`
+}
+
+// EBS volume specifications such as volume type, IOPS, size (GiB) and throughput
+// (MiB/s) that are requested for the EBS volume attached to an Amazon EC2 instance
+// in the cluster.
+type VolumeSpecification struct {
+	VolumeType *string `json:"volumeType,omitempty"`
+}

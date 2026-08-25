@@ -1,0 +1,13 @@
+apiVersion: emr.services.k8s.aws/v1alpha1
+kind: SecurityConfiguration
+metadata:
+  name: "$RESOURCE_NAME"
+spec:
+  name: "$RESOURCE_NAME"
+  configuration: |
+    {
+      "EncryptionConfiguration": {
+        "EnableInTransitEncryption": false,
+        "EnableAtRestEncryption": false
+      }
+    }

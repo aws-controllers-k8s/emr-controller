@@ -1,6 +1,28 @@
 ignore:
   resource_names:
       - PersistentAppUI
-      - SecurityConfiguration
       - Studio
       - StudioSessionMapping
+resources:
+  SecurityConfiguration:
+    fields:
+      Name:
+        is_primary_key: true
+        is_immutable: true
+      Configuration:
+        is_immutable: true
+        is_document: true
+    renames:
+      operations:
+        CreateSecurityConfiguration:
+          input_fields:
+            SecurityConfiguration: Configuration
+        DescribeSecurityConfiguration:
+          output_fields:
+            SecurityConfiguration: Configuration
+    tags:
+      ignore: true
+    exceptions:
+      errors:
+        404:
+          code: InvalidRequestException

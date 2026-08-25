@@ -41,6 +41,8 @@ import (
 	svctypes "github.com/aws-controllers-k8s/emr-controller/apis/v1alpha1"
 	svcresource "github.com/aws-controllers-k8s/emr-controller/pkg/resource"
 
+	_ "github.com/aws-controllers-k8s/emr-controller/pkg/resource/security_configuration"
+
 	"github.com/aws-controllers-k8s/emr-controller/pkg/version"
 )
 
