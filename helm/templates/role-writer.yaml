@@ -16,6 +16,7 @@ rules:
 - apiGroups:
   - emr.services.k8s.aws
   resources:
+  - securityconfigurations
   verbs:
   - create
   - delete
@@ -27,6 +28,7 @@ rules:
 - apiGroups:
   - emr.services.k8s.aws
   resources:
+  - securityconfigurations
   verbs:
   - get
   - patch
